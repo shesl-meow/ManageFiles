@@ -9,10 +9,10 @@ if [ $# -le 2 ]; then
 fi
 
 if $(command -v $1 >/dev/null 2>&1); then
+    CHECKSUM=$1
+else
     echo "Checksum method you provided doesn't exist";
     exit 1;
-else
-    CHECKSUM=$1
 fi
 
 command -v exiftool >/dev/null 2>&1 || {
@@ -55,7 +55,7 @@ executefolder () {
 }
 
 if [ ! -d "$3" ]; then
-    echo "Please provide a output folder."; exit 1;
+    echo "Please provide a valid output folder."; exit 1;
 elif [ -f "$2" ]; then
     executefile "$2" "$3"
 elif [ -d "$2" ]; then
